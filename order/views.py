@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
+from django.views.generic import ListView
 from django.views.generic.edit import FormView
+from .models import Order
 from .forms import RegisterForm
 
 
@@ -19,3 +21,13 @@ class OrderCreate(FormView):
             'request': self.request
         })
         return kw
+
+
+class OrderList(ListView):
+    model = Order
+    template_name = 'order.html'
+    context_object_name = 'order_list'
+
+    def get_queryset(self):
+        queryset = Order.objects.filter(user__email=self.request.session.get('user'))
+        return queryset
