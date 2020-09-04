@@ -7,7 +7,7 @@ from django.db import models
 class User(models.Model):
     email = models.EmailField(verbose_name='이메일')
     password = models.CharField(max_length=128, verbose_name='비밀번호')
-    level = models.CharField(max_length=8, verbose_name='등급',
+    level = models.CharField(max_length=8, verbose_name='등급', default='user',
                              choices=(
                                  ('admin', 'admin'),
                                  ('user', 'user')
